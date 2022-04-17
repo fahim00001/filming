@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import './Register.css'
+import SocialLogin from '../SocialLogin/SocialLogin';
+import SocialRegister from '../socialRegister/SocialRegister';
 const Register = () => {
     const emailRef = useRef("");
     const passwordRef = useRef('');
@@ -53,9 +55,8 @@ const Register = () => {
                     </Form>
                 </div>
 
-                <div className=' col-12 col-lg-6 bg-success' >
-                    <p className='m-3 text-center fw-bolder'>OR MORE WAYS</p>
-                    <button type="submit">Google signIn</button>
+                <div className=' col-12 col-lg-6 customField-register' >
+                    <SocialRegister></SocialRegister>
                 </div>
             </div>
 

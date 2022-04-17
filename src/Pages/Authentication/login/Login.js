@@ -1,11 +1,35 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../../firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
   const emailRef = useRef('');
   const passwordRef = useRef("");
-   
+  const navigate = useNavigate();
+  let errorElement;
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+] = useSignInWithEmailAndPassword(auth);
+if(user){
+  navigate('/home')
+}
+if(error){
+  errorElement = <p className='text-danger'>Error: {error?.message}</p>
+}
+const handleLogin = event =>{
+  event.preventDefault();
+  const email = emailRef.current.value;
+  const password = passwordRef.current.value;
+
+  signInWithEmailAndPassword(email,password);
+
+}
     return (
         <div>
             <div className='container mx-auto w-100 border border-2 p-5 rounded-3'>
@@ -14,18 +38,19 @@ const Login = () => {
               
                </div>
                <div className='col-lg-6'>
-               <Form>
+                 <h1 className='mb-4 text-center' >Login</h1>
+               <Form onSubmit={handleLogin}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
+    <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
     
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
+    <Form.Control ref={passwordRef} type="password" placeholder="Password" />
   </Form.Group>
-  
+  {errorElement}
   <Button  variant="primary" type="submit">
     Login
   </Button>  
@@ -36,8 +61,10 @@ const Login = () => {
     <p className='m-3 '>or more ways</p>
     <div className='w-25' ><hr /></div>
     </div>
-    <button type="submit">Google signIn</button>
     
+    <div className='d-flex align-items-center '>
+       <SocialLogin></SocialLogin>
+    </div>
                 </Form>
                </div>
                 </div>

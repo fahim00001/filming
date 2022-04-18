@@ -1,0 +1,8 @@
+.card-custom img{
+  width: 350px;
+  height:266px;
+  padding: 3%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+/* style={{"width":"90%" ,"padding":"3%","margin":"0 auto"}} */

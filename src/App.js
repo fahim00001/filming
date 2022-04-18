@@ -10,6 +10,7 @@ import CheckoutSuccess from './Pages/Checkout/success/CheckoutSuccess';
 import Home from './Pages/Home/Home/Home';
 import Services from './Pages/Home/Services/Services';
 import Header from './Pages/Shared/Header/Header';
+import Footer from './Pages/Shared/Footer/footer';
 import Showdetails from './Pages/ShowDetails/Showdetails';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path='/register' element={<Register></Register>} ></Route>
           <Route path='/login' element={<Login></Login>} ></Route>
         </Routes>
+        <Footer></Footer>
     </div>
   );
 }

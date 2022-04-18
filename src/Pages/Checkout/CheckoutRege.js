@@ -13,7 +13,7 @@ const Checkout = () => {
     const [user, loading, error] = useAuthState(auth);
     console.log(user);
     return (
-        <div className='container border border-2 rounded p-5'>
+        <div className='container border border-2 my-4 rounded p-5'>
             <h1 className='text-center my-3'>Order confirmation</h1>
             <form className="row g-3 needs-validation" novalidate>
             <div className="col-lg-12 w-75">

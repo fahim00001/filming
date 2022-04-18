@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import BannerimgLogin from '../../../images/camerapicLogin.jpg';
+import  './Login.css'
 
 const Login = () => {
   const emailRef = useRef('');
@@ -39,14 +41,14 @@ const handleLogin = event =>{
 
 }
     return (
-        <div>
-            <div className='container mx-auto w-100 border border-2 p-5 rounded-3'>
+        <div className='my-5'>
+            <div className='container mx-auto w-100  p-3  '>
                 <div className='row'>
                <div className='col-lg-6'>
-              
+                  <img className='img-fluid login-img-custom' src={BannerimgLogin} alt="" srcset="" />
                </div>
-               <div className='col-lg-6'>
-                 <h1 className='mb-4 text-center' >Login</h1>
+               <div className='col-lg-6 border border-2 rounded-3 p-3'>
+                 <h1 className='mb-4 text-center text-warning' >Login</h1>
                <Form onSubmit={handleLogin}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>

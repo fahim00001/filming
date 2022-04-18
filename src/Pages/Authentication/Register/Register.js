@@ -19,6 +19,7 @@ const Register = () => {
     console.log(user);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    
     const navigate = useNavigate();
     const handleRegister = async(event) =>{
         event.preventDefault();
@@ -32,8 +33,8 @@ const Register = () => {
         navigate('/home')
     }
     return (
-        <div className='container mx-auto w-100 border border-2 p-5 rounded-3'>
-            <h1 className='text-center mb-3' >Register</h1>
+        <div className='container my-5 mx-auto w-100 border border-2 p-5 rounded-3'>
+            <h1 className='text-center mb-3 text-primary' >Register</h1>
             <div className='row' >
                 <div className='col-12 col-lg-6'>
                     <Form onSubmit={handleRegister}>

@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <Navbar className='mb-5' sticky='top' collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Container>
-  <Navbar.Brand className='font-monospace fs-2 fw-bold'as={Link} to="/">CineSpark</Navbar.Brand>
+  <Navbar.Brand className='font-monospace fs-2 fw-bold'as={Link} to="/">Cine<span className='text-warning' >Spark</span> </Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     

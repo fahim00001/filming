@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+// const navigate = useNavigate()
+
+// const handleCheckoutNavigation = () =>{
+//   navigate('/checkoutSuccess')
+// }
 
 const Checkout = () => {
     const [agree, setAgree] = useState(false);
@@ -70,8 +76,13 @@ const Checkout = () => {
       </div>
     </div>
   </div>
+  
   <div className="col-12">
-    <button  disabled={!agree} className="btn btn-primary" type="submit">Submit </button>
+   {
+     true ? <Link to='/checkoutSuccess'> <button  disabled={!agree}  className="btn btn-primary" type="submit">Submit </button></Link> :
+     <Link to='/checkoutSuccess'> <button   className="btn btn-primary" type="submit">Submit </button></Link> 
+   }
+    
   </div>
 </form>
 

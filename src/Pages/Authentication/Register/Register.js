@@ -15,7 +15,7 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
     console.log(user);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 

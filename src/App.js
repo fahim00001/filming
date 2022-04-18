@@ -12,6 +12,7 @@ import Services from './Pages/Home/Services/Services';
 import Header from './Pages/Shared/Header/Header';
 import Footer from './Pages/Shared/Footer/footer';
 import Showdetails from './Pages/ShowDetails/Showdetails';
+import NotFound from './Pages/Shared/Notfound/NotFound';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path='/checkoutSuccess' element={<CheckoutSuccess></CheckoutSuccess>} ></Route>
           <Route path='/register' element={<Register></Register>} ></Route>
           <Route path='/login' element={<Login></Login>} ></Route>
+          <Route path='*' element={<NotFound></NotFound>} ></Route>
         </Routes>
         <Footer></Footer>
     </div>

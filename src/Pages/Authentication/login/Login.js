@@ -1,12 +1,14 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import BannerimgLogin from '../../../images/camerapicLogin.jpg';
 import  './Login.css'
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
   const emailRef = useRef('');
@@ -22,8 +24,10 @@ const Login = () => {
     loading,
     error,
 ] = useSignInWithEmailAndPassword(auth);
-console.log(user);
-if(loading){
+
+const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+if(loading || sending){
   return <Loading></Loading>
 }
 if(user){
@@ -40,6 +44,17 @@ const handleLogin = event =>{
   signInWithEmailAndPassword(email,password);
 
 }
+  const  handleresetPassword = async () =>{
+    const email = emailRef.current.value;
+    if(email){
+      await sendPasswordResetEmail(email);
+      toast('sent email')
+    }
+    else{
+      toast('please enter your email')
+    }
+  }
+
     return (
         <div className='my-5'>
             <div className='container mx-auto w-100  p-3  '>
@@ -64,7 +79,7 @@ const handleLogin = event =>{
   <Button  variant="primary" type="submit">
     Login
   </Button>  
- <p className='d-flex align-items-center mb-2' >Forgot password?<Button className='text-decoration-none text-warning' variant="link">Reset password</Button> </p> 
+ <p className='d-flex align-items-center mb-2' >Forgot password?<Button className='text-decoration-none text-warning' variant="link" onClick={handleresetPassword}>Reset password</Button> </p> <ToastContainer/>
   <p className='mt-3 text-center'>New in cineSpark? <Link to="/register" className='text-primary pe-auto text-decoration-none' >Register now</Link></p>
     <div className='d-flex justify-content-center align-items-center'>
     <div className='w-25' ><hr /></div>
@@ -72,9 +87,10 @@ const handleLogin = event =>{
     <div className='w-25' ><hr /></div>
     </div>
     
-    <div className='d-flex align-items-center '>
+    <div className=' '>
        <SocialLogin></SocialLogin>
     </div>
+    
                 </Form>
                </div>
                 </div>

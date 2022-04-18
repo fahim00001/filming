@@ -1,32 +1,35 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
-import { useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile} from 'react-firebase-hooks/auth';
 import './Register.css'
-import SocialLogin from '../SocialLogin/SocialLogin';
 import SocialRegister from '../socialRegister/SocialRegister';
 const Register = () => {
     const emailRef = useRef("");
     const passwordRef = useRef('');
     const userNameRef = useRef('');
-
+    
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    console.log(user);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-
-    const handleRegister = event =>{
+    const navigate = useNavigate();
+    const handleRegister = async(event) =>{
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const UserName = userNameRef.current.value;
 
-        createUserWithEmailAndPassword(email ,password);
-
+        await createUserWithEmailAndPassword(email ,password);
+        await updateProfile({displayName:UserName})
+        console.log('updated');
+        navigate('/home')
     }
     return (
         <div className='container mx-auto w-100 border border-2 p-5 rounded-3'>

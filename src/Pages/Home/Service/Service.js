@@ -1,10 +1,14 @@
 import React from 'react';
-import { Card, Col } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const Service = ({service}) => {
     const {id,name,picture,about} = service;
-    
+    const navigate = useNavigate();
+
+    const navigateShowDetails = id  =>{
+      navigate(`/service/${id}`);
+    }
     return (
       <Col className='card-custom col-12'>
        <Card className=''>
@@ -12,12 +16,11 @@ const Service = ({service}) => {
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in to
-            additional content. This content is a little bit longer.
+            {about}
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+        <Button onClick={() => navigateShowDetails(id)} variant="dark">ShowDetails</Button>
         </Card.Footer>
       </Card>
       </Col>
